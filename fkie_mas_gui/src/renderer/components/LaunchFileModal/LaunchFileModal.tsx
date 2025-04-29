@@ -415,49 +415,8 @@ const LaunchFileModal = forwardRef<HTMLDivElement, LaunchFileModalProps>(functio
                             })
                           );
                         }}
-                        onInputChange={(_event, newInputValue) => {
-                          setCurrentArgs(
-                            currentArgs.map((item) => {
-                              if (item.name === arg.name) {
-                                item.value = newInputValue;
-                                // update last path
-                                if (isPathParam(item.name, item.value)) {
-                                  setLastOpenPath(item.value);
-                                }
-                              }
-                              return item;
-                            })
-                          );
-                        }}
                         isOptionEqualToValue={(option, value) => {
                           return value === undefined || value === "" || option === value;
-                        }}
-                        onWheel={(event) => {
-                          // scroll through the options using mouse wheel
-                          let newIndex = -1;
-                          options.forEach((value, index) => {
-                            if (value === (event.target as HTMLInputElement).value) {
-                              if (event.deltaY > 0) {
-                                newIndex = index + 1;
-                              } else {
-                                newIndex = index - 1;
-                              }
-                            }
-                          });
-                          if (newIndex < 0) newIndex = options.length - 1;
-                          else if (newIndex > options.length - 1) newIndex = 0;
-                          setCurrentArgs(
-                            currentArgs.map((item) => {
-                              if (item.name === arg.name) {
-                                item.value = options[newIndex];
-                                // update last path on wheel
-                                if (isPathParam(item.name, item.value)) {
-                                  setLastOpenPath(item.value);
-                                }
-                              }
-                              return item;
-                            })
-                          );
                         }}
                       />
                     )}
